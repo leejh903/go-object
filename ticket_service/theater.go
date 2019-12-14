@@ -9,13 +9,5 @@ func NewTheater(ticketSeller *TicketSeller) Theater {
 }
 
 func (t Theater) Enter(audience Audience) {
-	if audience.GetBag().HasInvitation() {
-		ticket := t.ticketSeller.GetTicketOffice().GetTicket()
-		audience.GetBag().SetTicket(&ticket)
-	} else {
-		ticket := t.ticketSeller.ticketOffice.GetTicket()
-		audience.GetBag().MinusAmount(ticket.GetFee())
-		t.ticketSeller.GetTicketOffice().PlusAmount(ticket.GetFee())
-		audience.GetBag().SetTicket(&ticket)
-	}
+	t.ticketSeller.SellTo(audience)
 }

@@ -19,22 +19,26 @@ func NewBagWithInvitation(invitation Invitation, amount uint64) Bag {
 	}
 }
 
-func (b Bag) HasInvitation() bool {
+func (b Bag) Hold(ticket Ticket) uint64 {
+	if b.hasInvitation() {
+		b.setTicket(&ticket)
+		return 0
+	} else {
+		b.setTicket(&ticket)
+		b.minusAmount(ticket.GetFee())
+		return ticket.GetFee()
+	}
+}
+
+func (b Bag) hasInvitation() bool {
 	return b.invitation != nil
 }
 
-func (b Bag) HasTicket() bool {
-	return b.ticket != nil
-}
-
-func (b Bag) SetTicket(ticket *Ticket) {
+func (b Bag) setTicket(ticket *Ticket) {
 	b.ticket = ticket
 }
 
-func (b Bag) MinusAmount(amount uint64) {
+func (b Bag) minusAmount(amount uint64) {
 	b.amount -= amount
 }
 
-func (b Bag) PlusAmount(amount uint64) {
-	b.amount += amount
-}

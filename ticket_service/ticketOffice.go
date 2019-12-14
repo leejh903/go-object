@@ -18,10 +18,6 @@ func (t TicketOffice) GetTicket() Ticket {
 	return ticket
 }
 
-func (t TicketOffice) MinusAmount(amount uint64) {
-	t.amount -= amount
-}
-
-func (t TicketOffice) PlusAmount(amount uint64) {
+func (t TicketOffice) plusAmount(amount uint64) {
 	t.amount += amount
 }

@@ -8,6 +8,7 @@ func NewTicketSeller(ticketOffice *TicketOffice) TicketSeller {
 	return TicketSeller{ticketOffice}
 }
 
-func (t TicketSeller) GetTicketOffice() TicketOffice {
-	return *t.ticketOffice
+func (t TicketSeller) SellTo(audience Audience) {
+	ticket := t.ticketOffice.GetTicket()
+	t.ticketOffice.plusAmount(audience.Buy(ticket))
 }
